@@ -2,7 +2,6 @@
 //  Не имеет никакой логики, кроме стилистических настроек.
 
 import 'package:flutter/material.dart';
-import 'AppHomePage.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar _appBar = AppBar(

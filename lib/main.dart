@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'classes/AppHomePage.dart';
+import 'classes/app_home_page.dart';
 
 void main() => runApp(Application());
 
@@ -10,8 +8,6 @@ class Application extends StatelessWidget {
   //  Переопределяем метод build для класса приложения
   @override
   Widget build(BuildContext context) {
-    //  Выключаем нижнюю панель управления, оставляя верхнюю.
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     //  Запускаем визуальную составляющую приложения в стиле Material.
     return MaterialApp(
       title: "Medical Shop",

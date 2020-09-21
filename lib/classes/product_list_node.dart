@@ -1,7 +1,7 @@
 //  Класс плитки в ListView.
 
+import 'product.dart';
 import 'package:flutter/material.dart';
-import 'Product.dart';
 
 class ProductListNode extends StatelessWidget {
   final Product product;
