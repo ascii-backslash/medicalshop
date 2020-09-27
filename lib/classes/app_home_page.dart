@@ -50,18 +50,26 @@ class AppHomePageState extends State<AppHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            "MEDSHOP",
-            style: TextStyle(
-              color: Colors.white,
-              wordSpacing: 1.5,
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-            ),
+        title: Text(
+          "MEDSHOP",
+          style: TextStyle(
+            color: Colors.white,
+            wordSpacing: 1.5,
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            color: Colors.white,
+            onPressed: () {
+
+            },
+          ),
+        ],
       ),
+
       body: listView,
     );
   }
