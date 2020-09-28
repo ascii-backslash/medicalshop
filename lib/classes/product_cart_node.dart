@@ -1,15 +1,23 @@
-import 'package:medicalshop/classes/shopping_cart.dart';
-
 import 'product.dart';
 import 'package:flutter/material.dart';
+import 'package:medicalshop/classes/shopping_cart.dart';
 
-class ProductCartNode extends StatelessWidget {
-
-  final ShoppingCart _cart = ShoppingCart();
-
+class ProductCartNode extends StatefulWidget {
   final Product _product;
   final Function _refresh;
   ProductCartNode(this._product, this._refresh);
+
+  @override
+  _ProductCartNodeState createState() => _ProductCartNodeState(_product, _refresh);
+}
+
+class _ProductCartNodeState extends State<ProductCartNode> {
+
+  ShoppingCart _cart = ShoppingCart();
+
+  Product _product;
+  Function _refresh;
+  _ProductCartNodeState(this._product, this._refresh);
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +113,12 @@ class ProductCartNode extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.remove),
                     iconSize: 25,
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _cart.less(_product);
+                        _refresh();
+                      });
+                    },
                   ),
                   Text(
                     _cart.getProductCount(_product).toString(),
@@ -116,7 +129,12 @@ class ProductCartNode extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.add),
                     iconSize: 25,
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _cart.more(_product);
+                        _refresh();
+                      });
+                    },
                   ),
                 ],
               ),

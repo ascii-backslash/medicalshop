@@ -40,7 +40,7 @@ class AppHomePageState extends State<AppHomePage> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return AppProductPage(products[index]);
+                  return AppProductPage(products[index], null);
                 }
               ),
             );

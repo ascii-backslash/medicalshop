@@ -7,7 +7,9 @@ class AppProductPage extends StatelessWidget {
   final ShoppingCart _cart = ShoppingCart();
 
   final Product _product;
-  AppProductPage(this._product);
+  final Function _refresh;
+
+  AppProductPage(this._product, this._refresh);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class AppProductPage extends StatelessWidget {
             color: Colors.white,
             onPressed: () {
               _cart.add(_product);
+              _refresh();
             },
           ),
         ],
