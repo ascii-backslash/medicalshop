@@ -11,7 +11,11 @@ class AppCartPage extends StatefulWidget {
 class _AppCartPageState extends State<AppCartPage> {
   
   ShoppingCart _cart = ShoppingCart();
-  
+
+  void _refresh() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +24,7 @@ class _AppCartPageState extends State<AppCartPage> {
           "Корзина",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            wordSpacing: 1.5,
+            letterSpacing: 1.2,
             color: Colors.white,
             fontSize: 25,
           ),
@@ -37,8 +41,36 @@ class _AppCartPageState extends State<AppCartPage> {
       body: ListView.builder(
         itemCount: _cart.itemCount(),
         itemBuilder: (context, index) {
-          return ProductCartNode(_cart.getItem(index));
+          return ProductCartNode(_cart.getItem(index), _refresh);
         },
+      ),
+
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+          children: [
+            Text(
+              "Цена: " + _cart.fullPrice().toString() + " руб.",
+              style: TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+            Spacer(),
+            FlatButton(
+              color: Colors.cyan,
+              child: Text(
+                "Купить",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.8,
+                ),
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,12 +1,15 @@
-//  Класс плитки в ListView.
+import 'package:medicalshop/classes/shopping_cart.dart';
 
 import 'product.dart';
 import 'package:flutter/material.dart';
 
 class ProductCartNode extends StatelessWidget {
-  final Product _product;
 
-  ProductCartNode(this._product);
+  final ShoppingCart _cart = ShoppingCart();
+
+  final Product _product;
+  final Function _refresh;
+  ProductCartNode(this._product, this._refresh);
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +93,8 @@ class ProductCartNode extends StatelessWidget {
                     icon: Icon(Icons.clear),
                     iconSize: 25,
                     onPressed: () {
-
+                      _cart.remove(_product);
+                      _refresh();
                     },
                   )
                 ],

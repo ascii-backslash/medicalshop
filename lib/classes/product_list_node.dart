@@ -1,9 +1,8 @@
 //  Класс плитки в ListView.
 
-import 'package:medicalshop/classes/shopping_cart.dart';
-
 import 'product.dart';
 import 'package:flutter/material.dart';
+import 'shopping_cart.dart';
 
 class ProductListNode extends StatelessWidget {
 

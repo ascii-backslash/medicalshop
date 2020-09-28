@@ -31,4 +31,14 @@ class ShoppingCart {
   Product getItem(int index) {
     return _products[index];
   }
+
+  double fullPrice() {
+    double price = 0.0;
+
+    _products.forEach((element) {
+      price += element.cost;
+    });
+
+    return price;
+  }
 }
