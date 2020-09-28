@@ -41,7 +41,7 @@ class _AppCartPageState extends State<AppCartPage> {
       body: ListView.builder(
         itemCount: _cart.itemCount(),
         itemBuilder: (context, index) {
-          return ProductCartNode(_cart.getItem(index), _refresh);
+          return ProductCartNode(_cart.getProduct(index), _refresh);
         },
       ),
 

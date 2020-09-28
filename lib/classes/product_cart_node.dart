@@ -108,7 +108,7 @@ class ProductCartNode extends StatelessWidget {
                     onPressed: () {},
                   ),
                   Text(
-                    "1",
+                    _cart.getProductCount(_product).toString(),
                     style: TextStyle(
                       fontSize: 15,
                     ),
