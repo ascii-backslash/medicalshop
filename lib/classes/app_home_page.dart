@@ -1,6 +1,7 @@
 //  Класс главной страницы приложения.
 
 import 'product.dart';
+import 'app_cart_page.dart';
 import 'app_product_page.dart';
 import 'product_list_node.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,14 @@ class AppHomePageState extends State<AppHomePage> {
             icon: Icon(Icons.shopping_cart),
             color: Colors.white,
             onPressed: () {
-
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return AppCartPage();
+                  }
+                ),
+              );
             },
           ),
         ],

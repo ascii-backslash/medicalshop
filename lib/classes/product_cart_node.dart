@@ -1,16 +1,12 @@
 //  Класс плитки в ListView.
 
-import 'package:medicalshop/classes/shopping_cart.dart';
-
 import 'product.dart';
 import 'package:flutter/material.dart';
 
-class ProductListNode extends StatelessWidget {
-
-  final ShoppingCart _cart = ShoppingCart();
-
+class ProductCartNode extends StatelessWidget {
   final Product _product;
-  ProductListNode(this._product);
+
+  ProductCartNode(this._product);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +29,7 @@ class ProductListNode extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 15.0),
             child: Container(
-              width: 150.0,
+              width: 130.0,
               height: 150.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,20 +82,37 @@ class ProductListNode extends StatelessWidget {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.favorite_border),
+                    icon: Icon(Icons.clear),
+                    iconSize: 25,
+                    onPressed: () {
+
+                    },
+                  )
+                ],
+              ),
+              Spacer(),
+              Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.remove),
                     iconSize: 25,
                     onPressed: () {},
                   ),
+                  Text(
+                    "1",
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
                   IconButton(
-                    icon: Icon(Icons.add_shopping_cart),
+                    icon: Icon(Icons.add),
                     iconSize: 25,
-                    onPressed: () {
-                      _cart.add(_product);
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),

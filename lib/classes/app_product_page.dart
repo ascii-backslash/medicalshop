@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:medicalshop/classes/shopping_cart.dart';
 import 'product.dart';
 
 class AppProductPage extends StatelessWidget {
 
-  final Product _product;
+  final ShoppingCart _cart = ShoppingCart();
 
+  final Product _product;
   AppProductPage(this._product);
 
   @override
@@ -27,7 +29,9 @@ class AppProductPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.add_shopping_cart),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              _cart.add(_product);
+            },
           ),
         ],
       ),
