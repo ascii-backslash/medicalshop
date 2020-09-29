@@ -56,6 +56,7 @@ flutter:
     - images/pic8.jpg
     - images/pic9.jpg
     - images/pic10.jpg
+    - products.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

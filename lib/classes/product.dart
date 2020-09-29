@@ -22,4 +22,17 @@ class Product
       this.image,
       this.cost
       );
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+        json["id"] as int,
+        json["companyName"] as String,
+        json["productName"] as String,
+        json["description"] as String,
+        json["note"] as String,
+        json["size"] as String,
+        json["image"] as String,
+        json["cost"] as double
+    );
+  }
 }
