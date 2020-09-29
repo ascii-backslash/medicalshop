@@ -50,6 +50,9 @@ class AppHomePageState extends State<AppHomePage> {
         future: DefaultAssetBundle.of(context).loadString("assets/products.json"),
         builder: (context, snapshot) {
           List<dynamic> data = snapshot.data == null ? [] : json.decode(snapshot.data);
+          if (snapshot.data == null) {
+            return Center(child: CircularProgressIndicator());
+          }
           return ListView.builder(
             itemCount: data.length,
             itemBuilder: (context, index) {
@@ -60,14 +63,14 @@ class AppHomePageState extends State<AppHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) {
-                        return AppProductPage(_product, null);
-                      }
+                        builder: (context) {
+                          return AppProductPage(_product, null);
+                        }
                     ),
                   );
                 },
               );
-            }
+            },
           );
         },
       ),

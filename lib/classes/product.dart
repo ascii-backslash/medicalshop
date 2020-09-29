@@ -35,4 +35,6 @@ class Product
         json["cost"] as double
     );
   }
+
+  int get id => _id;
 }

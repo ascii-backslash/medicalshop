@@ -17,7 +17,7 @@ class ShoppingCart {
   }
 
   void add(Product item) {
-    int index = _products.indexWhere((element) => element.product == item);
+    int index = _products.indexWhere((element) => element.product.id == item.id);
     if (index == -1) {
       _products.add(_ProductCounter(item));
     } else {
@@ -28,14 +28,14 @@ class ShoppingCart {
   void more(Product item) => add(item);
 
   void less(Product item) {
-    int index = _products.indexWhere((element) => element.product == item);
+    int index = _products.indexWhere((element) => element.product.id == item.id);
     if (index != -1) {
       _products[index].less();
     }
   }
 
   void remove(Product item) {
-    int index = _products.indexWhere((element) => element.product == item);
+    int index = _products.indexWhere((element) => element.product.id == item.id);
     if (index != -1) {
       _products.removeAt(index);
     }
@@ -46,7 +46,7 @@ class ShoppingCart {
   }
 
   int getProductCount(Product item) {
-    int index = _products.indexWhere((element) => element.product == item);
+    int index = _products.indexWhere((element) => element.product.id == item.id);
     if (index == -1) {
       return null;
     } else {
