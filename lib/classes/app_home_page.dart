@@ -1,5 +1,7 @@
 //  Класс главной страницы приложения.
 
+import 'package:medicalshop/classes/app_product_page.dart';
+
 import 'product.dart';
 import 'dart:convert';
 import 'app_cart_page.dart';
@@ -51,7 +53,20 @@ class AppHomePageState extends State<AppHomePage> {
           return ListView.builder(
             itemCount: data.length,
             itemBuilder: (context, index) {
-              return ProductListNode(Product.fromJson(data[index]));
+              Product _product = Product.fromJson(data[index]);
+              return GestureDetector(
+                child: ProductListNode(_product),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AppProductPage(_product, null);
+                      }
+                    ),
+                  );
+                },
+              );
             }
           );
         },
