@@ -49,7 +49,7 @@ class AppHomePageState extends State<AppHomePage> {
       body: FutureBuilder(
         future: DefaultAssetBundle.of(context).loadString("assets/products.json"),
         builder: (context, snapshot) {
-          List<dynamic> data = json.decode(snapshot.data);
+          List<dynamic> data = snapshot.data == null ? [] : json.decode(snapshot.data);
           return ListView.builder(
             itemCount: data.length,
             itemBuilder: (context, index) {
