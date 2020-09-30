@@ -64,7 +64,7 @@ class FavoriteProductsBase {
       },
       onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE IF NOT EXISTS" + tableName + "(id INT PRIMARY KEY, liked STRING)"
+          "CREATE TABLE IF NOT EXISTS " + tableName + "(id INT PRIMARY KEY, liked STRING)"
         );
       }
     );
