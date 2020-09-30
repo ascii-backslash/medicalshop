@@ -25,7 +25,6 @@ class _AppCartPageState extends State<AppCartPage> {
           "Корзина",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
             color: Colors.white,
             fontSize: 25,
           ),

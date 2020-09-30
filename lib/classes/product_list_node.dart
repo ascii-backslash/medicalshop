@@ -1,15 +1,17 @@
 //  Класс плитки в ListView.
 
 import 'product.dart';
-import 'package:flutter/material.dart';
 import 'shopping_cart.dart';
+import 'favorite_icon_button.dart';
+import 'package:flutter/material.dart';
 
 class ProductListNode extends StatelessWidget {
 
   final ShoppingCart _cart = ShoppingCart();
 
   final Product _product;
-  ProductListNode(this._product);
+  final Function _refresh;
+  ProductListNode(this._product, this._refresh);
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +45,10 @@ class ProductListNode extends StatelessWidget {
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
+                      color: Colors.black.withAlpha(200),
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 1.0,
+                      letterSpacing: 1.2,
                     ),
                   ),
                   Text(
@@ -71,10 +74,11 @@ class ProductListNode extends StatelessWidget {
                   ),
                   Text(""),
                   Text(
-                    _product.cost.toString() + " руб.",
+                    _product.cost.truncate().toString() + " руб.",
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: TextStyle(
+                      color: Colors.cyan.withAlpha(180),
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -88,14 +92,11 @@ class ProductListNode extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.favorite_border),
-                    iconSize: 25,
-                    onPressed: () {},
-                  ),
+                  FavoriteIconButton(_product, null, _refresh),
                   IconButton(
                     icon: Icon(Icons.add_shopping_cart),
                     iconSize: 25,
+                    color: Colors.cyan,
                     onPressed: () {
                       _cart.add(_product);
                     },

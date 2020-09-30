@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicalshop/classes/favorite_icon_button.dart';
 import 'package:medicalshop/classes/shopping_cart.dart';
 import 'product.dart';
 
@@ -23,11 +24,7 @@ class AppProductPage extends StatelessWidget {
           },
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.favorite_border),
-            color: Colors.white,
-            onPressed: () {},
-          ),
+          FavoriteIconButton(_product, Colors.white, _refresh),
           IconButton(
             icon: Icon(Icons.add_shopping_cart),
             color: Colors.white,

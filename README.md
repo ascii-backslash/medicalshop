@@ -1,6 +1,6 @@
 # medicalshop
 
-A new Flutter project.
+My fist practice project.
 
 ## Getting Started
 
