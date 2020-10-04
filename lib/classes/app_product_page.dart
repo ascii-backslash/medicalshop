@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medicalshop/classes/favorite_icon_button.dart';
 import 'package:medicalshop/classes/shopping_cart.dart';
 import 'product.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AppProductPage extends StatelessWidget {
 
@@ -30,6 +31,13 @@ class AppProductPage extends StatelessWidget {
             color: Colors.white,
             onPressed: () {
               _cart.add(_product);
+              Fluttertoast.showToast(
+                msg: "Товар добавлен в корзину!",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                backgroundColor: Colors.lightBlue,
+                fontSize: 20.0,
+              );
               _refresh();
             },
           ),

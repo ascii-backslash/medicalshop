@@ -22,9 +22,9 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: FavoriteProductsBase.access.isProductLiked(_product.id),
+      future: FavoriteProductsBase.isProductLiked(_product.id),
       builder: (context, snapshot) {
-        Icon _icon;
+        IconData _icon;
         Color _putColor = _color == null ? Colors.cyan : _color;
 
         bool isLiked = snapshot.data;
@@ -37,22 +37,22 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton> {
 
         switch(isLiked) {
           case true:
-              _icon = Icon(Icons.favorite);
+              _icon = Icons.favorite;
             break;
           case false:
-              _icon = Icon(Icons.favorite_border);
+              _icon = Icons.favorite_border;
             break;
         }
 
         return IconButton(
-          icon: _icon,
+          icon: Icon(_icon),
           iconSize: 25,
           color: _putColor,
           onPressed: () {
             setState(() {
-              FavoriteProductsBase.access.changeLiked(_product.id);
+              _refresh();
+              FavoriteProductsBase.changeLiked(_product.id);
             });
-            _refresh();
           },
         );
       }

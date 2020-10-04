@@ -1,97 +1,56 @@
-import 'dart:async';
-import 'favorite_product.dart';
+import 'package:medicalshop/DAL/favorite_product.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class FavoriteProductsBase {
-  static Database _database;
-  static List<FavoriteProduct> _list;
-  static final FavoriteProductsBase access = FavoriteProductsBase._();
+abstract class FavoriteProductsBase {
+  static Database _db;
+  static const _baseName = "favorite_products.db";
+  static const _tableName = "favoriteProducts";
 
-  static const tableName = "favoriteProducts";
+  static Future<void> initDb() async {
+    if (_db != null) return;
 
-  FavoriteProductsBase._();
-
-  Future<bool> isProductLiked(int productId) async {
-    if (_list == null) {
-      _list = await initList();
-    }
-
-    int index = _list.indexWhere((element) => element.id == productId);
-    if (index == -1) {
-      return false;
-    } else {
-      return _list[index].liked;
-    }
-  }
-
-  Future<void> changeLiked(int productId) async {
-    if (_list == null) {
-      _list = await initList();
-    }
-
-    int index = _list.indexWhere((element) => element.id == productId);
-    if (index == -1) {
-      FavoriteProduct _favoriteProduct = FavoriteProduct(productId, true);
-      _list.add(_favoriteProduct);
-      await insertFavoriteProduct(_favoriteProduct);
-    } else {
-      _list[index].changeLiked();
-      await updateFavoriteProduct(_list[index]);
-    }
-  }
-
-  Future<List<FavoriteProduct>> initList() async {
-    if (_database == null) {
-      _database = await initDb();
-    }
-
-    List<Map<String, dynamic>> maps = await _database.query(tableName);
-
-    return List.generate(maps.length, (index) {
-      return FavoriteProduct.fromJson(maps[index]);
-    });
-  }
-
-  Future<Database> initDb() async {
-    return await openDatabase(
-      join(await getDatabasesPath(), "favorite_products.db"),
+    _db = await openDatabase(
+      join(await getDatabasesPath(), _baseName),
       version: 1,
       onOpen: (db) {
-        return db.execute(
-          "CREATE TABLE IF NOT EXISTS " + tableName + "(id INT PRIMARY KEY, liked STRING)"
-        );
+        return db.execute("CREATE TABLE IF NOT EXISTS " + _tableName + " (id INT PRIMARY KEY, liked STRING)");
       },
       onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE IF NOT EXISTS " + tableName + "(id INT PRIMARY KEY, liked STRING)"
-        );
+        return db.execute("CREATE TABLE IF NOT EXISTS " + _tableName + " (id INT PRIMARY KEY, liked STRING)");
       }
     );
   }
 
-  Future<void> insertFavoriteProduct(FavoriteProduct favoriteProduct) async {
-    if (_database == null) {
-      _database = await initDb();
+  static Future<bool> isProductLiked(int productId) async {
+    List<Map<String, dynamic>> _list = await _db.rawQuery("SELECT * FROM " + _tableName + " WHERE id = ?", [productId]);
+    if (_list.isEmpty) {
+      return false;
+    } else {
+      return FavoriteProduct.fromJson(_list[0]).liked;
     }
-
-    await _database.insert(
-      tableName,
-      favoriteProduct.toJson(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
   }
 
-  Future<void> updateFavoriteProduct(FavoriteProduct favoriteProduct) async {
-    if (_database == null) {
-      _database = await initDb();
-    }
+  static void changeLiked(int productId) async {
+    FavoriteProduct _product;
+    List<Map<String, dynamic>> _list = await _db.rawQuery("SELECT * FROM " + _tableName + " WHERE id = ?", [productId]);
 
-    await _database.update(
-      tableName,
-      favoriteProduct.toJson(),
-      where: "id = ?",
-      whereArgs: [favoriteProduct.id],
-    );
+    if (_list.isEmpty) {
+      _product = FavoriteProduct(productId, true);
+      _db.insert(
+        _tableName,
+        _product.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } else {
+      _product = FavoriteProduct.fromJson(_list[0]);
+      _product.changeLiked();
+      _db.update(
+        _tableName,
+        _product.toJson(),
+        where: "id = ?",
+        whereArgs: [productId],
+      );
+    }
   }
 }

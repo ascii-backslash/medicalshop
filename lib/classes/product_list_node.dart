@@ -1,5 +1,7 @@
 //  Класс плитки в ListView.
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'product.dart';
 import 'shopping_cart.dart';
 import 'favorite_icon_button.dart';
@@ -99,6 +101,13 @@ class ProductListNode extends StatelessWidget {
                     color: Colors.cyan,
                     onPressed: () {
                       _cart.add(_product);
+                      Fluttertoast.showToast(
+                        msg: "Товар добавлен в корзину!",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                        backgroundColor: Colors.lightBlue,
+                        fontSize: 20.0,
+                      );
                     },
                   ),
                 ],

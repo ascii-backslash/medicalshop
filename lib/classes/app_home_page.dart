@@ -62,6 +62,7 @@ class AppHomePageState extends State<AppHomePage> {
             return Center(child: CircularProgressIndicator());
           }
           return ListView.builder(
+            key: Key(data.length.toString()),
             itemCount: data.length,
             itemBuilder: (context, index) {
               Product _product = Product.fromJson(data[index]);
