@@ -49,10 +49,9 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton> {
           iconSize: 25,
           color: _putColor,
           onPressed: () {
-            setState(() {
-              _refresh();
-              FavoriteProductsBase.changeLiked(_product.id);
-            });
+            FavoriteProductsBase.changeLiked(_product.id);
+            _refresh();
+            setState(() {});
           },
         );
       }

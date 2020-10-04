@@ -103,8 +103,8 @@ class ProductListNode extends StatelessWidget {
                       _cart.add(_product);
                       Fluttertoast.showToast(
                         msg: "Товар добавлен в корзину!",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
                         backgroundColor: Colors.lightBlue,
                         fontSize: 20.0,
                       );
