@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'app_cart_page.dart';
 import 'product_list_node.dart';
 import 'package:flutter/material.dart';
-import 'package:medicalshop/classes/app_product_page.dart';
 
 class AppHomePage extends StatefulWidget {
   @override
@@ -56,37 +55,21 @@ class AppHomePageState extends State<AppHomePage> {
       body: FutureBuilder(
         future: DefaultAssetBundle.of(context).loadString("assets/products.json"),
         builder: (context, snapshot) {
-          List<dynamic> data =
-              snapshot.data == null ? [] : json.decode(snapshot.data);
-          if (snapshot.data == null) {
+          List<dynamic> data = snapshot.data == null ? [] : json.decode(snapshot.data);
+
+          if (snapshot.data == null)
             return Center(child: CircularProgressIndicator());
-          }
+
           return ListView.builder(
             key: Key(data.length.toString()),
             itemCount: data.length,
             itemBuilder: (context, index) {
               Product _product = Product.fromJson(data[index]);
-              return GestureDetector(
-                child: ProductListNode(_product, refresh),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return AppProductPage(_product, refresh);
-                      },
-                    ),
-                  );
-                },
-              );
+              return ProductListNode(_product);
             },
           );
         },
       ),
     );
-  }
-
-  void refresh() {
-    setState(() {});
   }
 }

@@ -9,9 +9,7 @@ class AppProductPage extends StatelessWidget {
   final ShoppingCart _cart = ShoppingCart();
 
   final Product _product;
-  final Function _refresh;
-
-  AppProductPage(this._product, this._refresh);
+  AppProductPage(this._product);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class AppProductPage extends StatelessWidget {
           },
         ),
         actions: [
-          FavoriteIconButton(_product, Colors.white, _refresh),
+          FavoriteIconButton(_product, Colors.white),
           IconButton(
             icon: Icon(Icons.add_shopping_cart),
             color: Colors.white,
@@ -38,7 +36,6 @@ class AppProductPage extends StatelessWidget {
                 backgroundColor: Colors.lightBlue,
                 fontSize: 20.0,
               );
-              _refresh();
             },
           ),
         ],

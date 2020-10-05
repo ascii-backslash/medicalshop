@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:medicalshop/classes/app_product_page.dart';
 import 'package:medicalshop/classes/product_cart_node.dart';
 import 'package:medicalshop/classes/shopping_cart.dart';
 
@@ -42,19 +41,7 @@ class _AppCartPageState extends State<AppCartPage> {
         key: Key(_cart.itemCount().toString()),
         itemCount: _cart.itemCount(),
         itemBuilder: (context, index) {
-          return GestureDetector(
-            child: ProductCartNode(_cart.getProduct(index), _refresh),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return AppProductPage(_cart.getProduct(index), _refresh);
-                  }
-                ),
-              );
-            },
-          );
+          return ProductCartNode(_cart.getProduct(index), _refresh);
         },
       ),
 

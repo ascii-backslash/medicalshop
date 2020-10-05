@@ -13,9 +13,6 @@ abstract class FavoriteProductsBase {
     _db = await openDatabase(
       join(await getDatabasesPath(), _baseName),
       version: 1,
-      onOpen: (db) {
-        return db.execute("CREATE TABLE IF NOT EXISTS " + _tableName + " (id INT PRIMARY KEY, liked STRING)");
-      },
       onCreate: (db, version) {
         return db.execute("CREATE TABLE IF NOT EXISTS " + _tableName + " (id INT PRIMARY KEY, liked STRING)");
       }
@@ -31,13 +28,13 @@ abstract class FavoriteProductsBase {
     }
   }
 
-  static void changeLiked(int productId) async {
+  static Future changeLiked(int productId) async {
     FavoriteProduct _product;
     List<Map<String, dynamic>> _list = await _db.rawQuery("SELECT * FROM " + _tableName + " WHERE id = ?", [productId]);
 
     if (_list.isEmpty) {
       _product = FavoriteProduct(productId, true);
-      _db.insert(
+      return _db.insert(
         _tableName,
         _product.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
@@ -45,7 +42,7 @@ abstract class FavoriteProductsBase {
     } else {
       _product = FavoriteProduct.fromJson(_list[0]);
       _product.changeLiked();
-      _db.update(
+      return _db.update(
         _tableName,
         _product.toJson(),
         where: "id = ?",
