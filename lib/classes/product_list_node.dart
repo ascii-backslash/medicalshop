@@ -7,12 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medicalshop/classes/app_product_page.dart';
 
-class ProductListNode extends StatelessWidget {
+class ProductListNode extends StatefulWidget {
+  final Product _product;
+  ProductListNode(this._product);
+
+  @override
+  ProductListNodeState createState() => ProductListNodeState();
+}
+
+class ProductListNodeState extends State<ProductListNode> {
   final ShoppingCart _cart = ShoppingCart();
 
-  final Product _product;
-
-  ProductListNode(this._product);
+  ProductListNodeState();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,7 @@ class ProductListNode extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                "images/" + _product.image,
+                "images/" + widget._product.image,
                 width: 130,
                 height: 130,
               ),
@@ -47,7 +53,7 @@ class ProductListNode extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        _product.companyName,
+                        widget._product.companyName,
                         overflow: TextOverflow.fade,
                         softWrap: false,
                         style: TextStyle(
@@ -58,7 +64,7 @@ class ProductListNode extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        _product.productName,
+                        widget._product.productName,
                         overflow: TextOverflow.ellipsis,
                         softWrap: true,
                         style: TextStyle(
@@ -68,7 +74,7 @@ class ProductListNode extends StatelessWidget {
                         maxLines: 2,
                       ),
                       Text(
-                        _product.size,
+                        widget._product.size,
                         overflow: TextOverflow.fade,
                         softWrap: false,
                         style: TextStyle(
@@ -80,7 +86,7 @@ class ProductListNode extends StatelessWidget {
                       ),
                       Text(""),
                       Text(
-                        _product.cost.truncate().toString() + " руб.",
+                        widget._product.cost.truncate().toString() + " руб.",
                         overflow: TextOverflow.fade,
                         softWrap: false,
                         style: TextStyle(
@@ -98,13 +104,13 @@ class ProductListNode extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      FavoriteIconButton(_product, null),
+                      FavoriteIconButton(widget._product, null),
                       IconButton(
                         icon: Icon(Icons.add_shopping_cart),
                         iconSize: 25,
                         color: Colors.cyan,
                         onPressed: () {
-                          _cart.add(_product);
+                          _cart.add(widget._product);
                           Fluttertoast.showToast(
                             msg: "Товар добавлен в корзину!",
                             toastLength: Toast.LENGTH_SHORT,
@@ -125,9 +131,13 @@ class ProductListNode extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
-              return AppProductPage(_product);
+              return AppProductPage(widget._product, _refresh);
             }),
           );
         });
+  }
+
+  void _refresh() {
+    setState(() {});
   }
 }

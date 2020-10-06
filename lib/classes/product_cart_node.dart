@@ -8,16 +8,14 @@ class ProductCartNode extends StatefulWidget {
   ProductCartNode(this._product, this._refresh);
 
   @override
-  _ProductCartNodeState createState() => _ProductCartNodeState(_product, _refresh);
+  _ProductCartNodeState createState() => _ProductCartNodeState();
 }
 
 class _ProductCartNodeState extends State<ProductCartNode> {
 
   ShoppingCart _cart = ShoppingCart();
 
-  Product _product;
-  Function _refresh;
-  _ProductCartNodeState(this._product, this._refresh);
+  _ProductCartNodeState();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
       ),
       child: Row(
         children: [
-          Image.asset("images/" + _product.image, width: 130, height: 130,),
+          Image.asset("images/" + widget._product.image, width: 130, height: 130,),
           Padding(
             padding: EdgeInsets.only(top: 15.0),
             child: Container(
@@ -47,7 +45,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    _product.companyName,
+                    widget._product.companyName,
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: TextStyle(
@@ -57,7 +55,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                     ),
                   ),
                   Text(
-                    _product.productName,
+                    widget._product.productName,
                     overflow: TextOverflow.ellipsis,
                     softWrap: true,
                     style: TextStyle(
@@ -67,7 +65,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                     maxLines: 2,
                   ),
                   Text(
-                    _product.size,
+                    widget._product.size,
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: TextStyle(
@@ -79,7 +77,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                   ),
                   Text(""),
                   Text(
-                    _product.cost.toString() + " руб.",
+                    widget._product.cost.toString() + " руб.",
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: TextStyle(
@@ -101,8 +99,8 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                     icon: Icon(Icons.clear),
                     iconSize: 25,
                     onPressed: () {
-                      _cart.remove(_product);
-                      _refresh();
+                      _cart.remove(widget._product);
+                      widget._refresh();
                     },
                   )
                 ],
@@ -115,13 +113,12 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                     iconSize: 25,
                     onPressed: () {
                       setState(() {
-                        _cart.less(_product);
-                        _refresh();
+                        _cart.less(widget._product);
                       });
                     },
                   ),
                   Text(
-                    _cart.getProductCount(_product).toString(),
+                    _cart.getProductCount(widget._product).toString(),
                     style: TextStyle(
                       fontSize: 15,
                     ),
@@ -131,8 +128,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                     iconSize: 25,
                     onPressed: () {
                       setState(() {
-                        _cart.more(_product);
-                        _refresh();
+                        _cart.more(widget._product);
                       });
                     },
                   ),

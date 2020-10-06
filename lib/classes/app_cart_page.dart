@@ -12,10 +12,6 @@ class _AppCartPageState extends State<AppCartPage> {
   
   ShoppingCart _cart = ShoppingCart();
 
-  void _refresh() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,5 +69,9 @@ class _AppCartPageState extends State<AppCartPage> {
         ),
       ),
     );
+  }
+
+  void _refresh() {
+    setState(() {});
   }
 }
