@@ -7,8 +7,8 @@ abstract class FavoriteProductsBase {
   static const _baseName = "favorite_products.db";
   static const _tableName = "favoriteProducts";
 
-  static Future<void> initDb() async {
-    if (_db != null) return;
+  static Future<bool> initDb() async {
+    if (_db != null) return true;
 
     _db = await openDatabase(
       join(await getDatabasesPath(), _baseName),
@@ -17,6 +17,8 @@ abstract class FavoriteProductsBase {
         return db.execute("CREATE TABLE IF NOT EXISTS " + _tableName + " (id INT PRIMARY KEY, liked STRING)");
       }
     );
+
+    return true;
   }
 
   static Future<bool> isProductLiked(int productId) async {
