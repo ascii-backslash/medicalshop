@@ -114,6 +114,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                     onPressed: () {
                       setState(() {
                         _cart.less(widget._product);
+                        widget._refresh();
                       });
                     },
                   ),
@@ -129,6 +130,7 @@ class _ProductCartNodeState extends State<ProductCartNode> {
                     onPressed: () {
                       setState(() {
                         _cart.more(widget._product);
+                        widget._refresh();
                       });
                     },
                   ),
